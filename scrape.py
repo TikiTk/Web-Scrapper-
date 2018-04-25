@@ -1,4 +1,4 @@
-payload = {"email": "##number##", "password": "##number##"}
+payload = {"email": "<phone number>", "password": "<password>"}
 
 import requests
 from lxml import html
@@ -17,4 +17,7 @@ print(result)
 
 pages = requests.get("https://badoo.com/encounters", params=dict(query="web scraping",page=2))
 
+
+print(pages.status_code)
+print(pages.headers.get("content-type","unknown"))
 
