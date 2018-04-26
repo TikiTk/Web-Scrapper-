@@ -1,8 +1,8 @@
-payload = {"email": "<phone number>", "password": "<password>"}
+payload = {"email": "+++++", "password": "+++++"}
 
 import requests
 from lxml import html
-from bs4 import beautifulsoup4
+from bs4 import BeautifulSoup
 
 session_requests = requests.session()
 
@@ -15,9 +15,18 @@ result = session_requests.post(login_url, payload, headers=dict(refer=login_url)
 
 print(result)
 
-pages = requests.get("https://badoo.com/encounters", params=dict(query="web scraping",page=2))
+pages = session_requests.get("https://badoo.com/profile/0626224514")#, params=dict(query="web scraping",page=2)))
+
+
+#pages = requests.get("https://badoo.com/profile/0626231310", params=dict(query="web scraping",page=2))
+
+print(pages.text)
 
 
 print(pages.status_code)
 print(pages.headers.get("content-type","unknown"))
 
+soup = BeautifulSoup(pages.text,"html.parser")
+links = soup.find_all("Wants")
+
+print(links)
